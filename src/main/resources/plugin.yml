@@ -1,0 +1,5 @@
+main: me.raviel.lib.RavielLib
+name: ${project.artifactId}
+version: ${project.version}
+author: Raviel
+api-version: 1.13
