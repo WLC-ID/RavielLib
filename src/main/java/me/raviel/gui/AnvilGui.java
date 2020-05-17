@@ -2,8 +2,8 @@ package me.raviel.gui;
 
 import me.raviel.compatibility.CompatibleMaterial;
 import me.raviel.gui.methods.Clickable;
-import me.raviel.nms.anvil.AnvilCore;
-import me.raviel.nms.anvil.CustomAnvil;
+import me.raviel.nms.version.anvil.AnvilCore;
+import me.raviel.nms.version.anvil.CustomAnvil;
 import me.raviel.nms.NmsManager;
 import java.util.Arrays;
 import java.util.List;

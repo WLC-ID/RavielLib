@@ -58,7 +58,7 @@ public class MainCommand extends AbstractCommand {
         if (header != null) {
             sender.sendMessage(header);
         } else {
-            sender.sendMessage(String.format("%s%s %s» %sVersion %s Created with <3 by %sSongoda",
+            sender.sendMessage(String.format("%s%s %s» %sVersion %s Created by %sRaviel",
                     ChatColor.GOLD.toString() + ChatColor.BOLD, plugin.getDescription().getName(),
                     ChatColor.DARK_GRAY.toString(), ChatColor.GRAY.toString(), plugin.getDescription().getVersion(),
                     ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + ChatColor.ITALIC
