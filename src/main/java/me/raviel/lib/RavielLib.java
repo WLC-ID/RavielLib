@@ -1,12 +1,17 @@
 package me.raviel.lib;
 
-import org.bukkit.Bukkit;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.bukkit.plugin.java.JavaPlugin;
+
+import me.raviel.plugin.PluginInfo;
 
 public class RavielLib extends JavaPlugin {
 
     private static RavielLib instance;
     private static int libversion;
+    private static Set<PluginInfo> rplugins = new HashSet<>();
 
     @Override
     public void onEnable(){
@@ -21,7 +26,7 @@ public class RavielLib extends JavaPlugin {
         } catch (NumberFormatException e){
             libversion = -1;
             instance = null;
-            Bukkit.getPluginManager().disablePlugin(this);
+            setEnabled(false);
             getLogger().severe("RavielLib Version Error, Disabling...");
         }
     }
@@ -38,6 +43,14 @@ public class RavielLib extends JavaPlugin {
 
     public static int getVersion(){
         return libversion;
+    }
+
+    public static Set<PluginInfo> getPlugins(){
+        return rplugins;
+    }
+
+    public static void register(PluginInfo plugininfo){
+        rplugins.add(plugininfo);
     }
     
 }

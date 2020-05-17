@@ -9,7 +9,7 @@
     <groupId>me.raviel</groupId>
     <artifactId>RavielLib</artifactId>
     <name>RavielLib</name>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
@@ -121,6 +121,11 @@
             <scope>system</scope>
             <systemPath>${basedir}/src/lib/paper-1.15.1.jar</systemPath>
         </dependency>
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>3.2.0</version>
+        </dependency>
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -131,7 +136,7 @@
     <!-- Build Settings -->
     <build>
         <defaultGoal>clean install</defaultGoal>
-        <finalName>${project.artifactId} (${project.version})</finalName>
+        <finalName>${project.artifactId}-${project.version}</finalName>
 
         <sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
         <resources>

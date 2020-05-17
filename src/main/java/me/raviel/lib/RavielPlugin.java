@@ -1,14 +1,18 @@
 package me.raviel.lib;
 
-import org.bukkit.plugin.java.JavaPlugin;
 import me.raviel.configuration.Config;
 import me.raviel.locale.Locale;
+import me.raviel.plugin.PluginInfo;
+
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public abstract class RavielPlugin extends JavaPlugin {
     protected Locale locale;
@@ -44,12 +48,14 @@ public abstract class RavielPlugin extends JavaPlugin {
         return config;
     }
 
-    public void configReload​() {
+    @Override
+    public void reloadConfig() {
         config.load();
         onConfigReload();
     }
 
-    public void configSave​() {
+    @Override
+    public void saveConfig(){
         config.save();
     }
 
@@ -70,6 +76,19 @@ public abstract class RavielPlugin extends JavaPlugin {
     @Override
     public final void onEnable() {
         if(emergencyStop) {
+            setEnabled(false);
+            return;
+        }
+        Optional<PluginInfo> pl = RavielLib.getPlugins().stream().filter(
+            plugin -> plugin.getPlugin().getName().equalsIgnoreCase(this.getName())).findFirst();
+        if (pl.isPresent()){
+            if (pl.get().getMinimumVersion() > RavielLib.getVersion()){
+                Bukkit.getLogger().log(Level.SEVERE, "Plugin " + pl.get().getPlugin().getName() + " needs at least RavielLib v" + pl.get().getMinimumVersionString());
+                setEnabled(false);
+                return;
+            }
+        } else {
+            Bukkit.getLogger().log(Level.SEVERE, "Plugin " + this.getName() + " is not registered on RavielLib.");
             setEnabled(false);
             return;
         }
@@ -119,7 +138,7 @@ public abstract class RavielPlugin extends JavaPlugin {
         console.sendMessage(" "); // blank line to speparate chatter
         console.sendMessage(ChatColor.GREEN + "=============================");
         console.sendMessage(String.format("%s%s %s by %sRaviel !", ChatColor.GRAY.toString(),
-                getDescription().getName(), getDescription().getVersion(), ChatColor.DARK_PURPLE.toString()));
+                getDescription().getName(), getDescription().getVersion(), ChatColor.GOLD.toString()));
         console.sendMessage(String.format("%sAction: %s%s%s...", ChatColor.GRAY.toString(),
                 ChatColor.RED.toString(), "Disabling", ChatColor.GRAY.toString()));
         onPluginDisable();
