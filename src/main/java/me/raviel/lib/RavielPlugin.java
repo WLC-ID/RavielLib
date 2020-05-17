@@ -61,7 +61,7 @@ public abstract class RavielPlugin extends JavaPlugin {
             Bukkit.getLogger().log(Level.SEVERE,
                     "Unexpected error while loading " + getDescription().getName()
                     + " v" + getDescription().getVersion()
-                    + " c"
+                    + " c" + RavielLib.getVersion()
                     + ": Disabling plugin!", t);
             emergencyStop = true;
         }
@@ -94,7 +94,7 @@ public abstract class RavielPlugin extends JavaPlugin {
             Bukkit.getLogger().log(Level.SEVERE,
                     "Unexpected error while loading " + getDescription().getName()
                     + " v" + getDescription().getVersion()
-                    + " c" 
+                    + " c" + RavielLib.getVersion()
                     + ": Disabling plugin!", t);
             emergencyStop();
             console.sendMessage(ChatColor.RED + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");

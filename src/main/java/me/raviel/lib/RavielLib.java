@@ -3,14 +3,10 @@ package me.raviel.lib;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import lombok.Getter;
-
 public class RavielLib extends JavaPlugin {
 
-    @Getter
     private static RavielLib instance;
-    @Getter
-    private int libversion = -1;
+    private static int libversion;
 
     @Override
     public void onEnable(){
@@ -21,12 +17,12 @@ public class RavielLib extends JavaPlugin {
 
     public void parseLibVersion(){
         try{
-            this.libversion = Integer.parseInt(getDescription().getVersion().replaceAll("[^0-9]", ""));
+            libversion = Integer.parseInt(getDescription().getVersion().replaceAll("[^0-9]", ""));
         } catch (NumberFormatException e){
-            this.libversion = -1;
+            libversion = -1;
             instance = null;
             Bukkit.getPluginManager().disablePlugin(this);
-            getLogger().warning("RavielLib Version Error, Disabling...");
+            getLogger().severe("RavielLib Version Error, Disabling...");
         }
     }
 
@@ -34,6 +30,14 @@ public class RavielLib extends JavaPlugin {
     public void onDisable(){
         instance = null;
         return;
+    }
+
+    public static RavielLib getLib(){
+        return instance;
+    }
+
+    public static int getVersion(){
+        return libversion;
     }
     
 }
