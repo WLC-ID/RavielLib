@@ -11,9 +11,6 @@
 # we use maven!
 /build.xml
 
-# maven
-/target
-
 # vim
 .*.sw[a-p]
 
@@ -36,6 +33,14 @@
 
 # Other Libraries
 *.jar
+/target/classes
+/target/generated-sources
+/target/generated-test-sources
+/target/maven-archiver
+/target/maven-status
+/target/test-classes
+!/target/
+!/target/*.jar
 
 # Atlassian Stuff
 /atlassian-ide-plugin.xml
