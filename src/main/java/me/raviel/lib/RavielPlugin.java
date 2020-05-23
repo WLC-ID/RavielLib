@@ -1,8 +1,8 @@
 package me.raviel.lib;
 
-import me.raviel.configuration.Config;
-import me.raviel.locale.Locale;
-import me.raviel.plugin.PluginInfo;
+import me.raviel.lib.configuration.Config;
+import me.raviel.lib.locale.Locale;
+import me.raviel.lib.plugin.PluginInfo;
 
 import java.util.List;
 import java.util.Optional;
