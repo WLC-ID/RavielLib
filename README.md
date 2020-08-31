@@ -1,4 +1,6 @@
 # RavielLib
+Standard Maven Project
+
 Ignore Compiler Warning:
 - Deprecation
 - Raw Type Reference
@@ -6,7 +8,7 @@ Ignore Compiler Warning:
 - Unchecked Type Operation
 - Missing Serial UID
 
->Code for .settings
+## For VSCode add these to .settings
 
 >org.eclipse.jdt.core.compiler.problem.deprecation=ignore
 >org.eclipse.jdt.core.compiler.problem.rawTypeReference=ignore
