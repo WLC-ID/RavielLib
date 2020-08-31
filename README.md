@@ -8,7 +8,7 @@ Ignore Compiler Warning:
 - Unchecked Type Operation
 - Missing Serial UID
 
-## For VSCode add these to .settings
+## For VSCode add these to .settings/org.eclipse.jdt.core.prefs
 
 >org.eclipse.jdt.core.compiler.problem.deprecation=ignore
 >org.eclipse.jdt.core.compiler.problem.rawTypeReference=ignore
