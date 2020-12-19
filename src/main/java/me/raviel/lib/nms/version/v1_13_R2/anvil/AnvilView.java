@@ -24,9 +24,9 @@ public class AnvilView extends ContainerAnvil implements CustomAnvil {
     private final Inventory inventory;
     private String title = "Repairing";
     private int cost = -1;
-    private boolean canUse = true;
+    private boolean canUse = true; 
     @SuppressWarnings("unused")
-    private AnvilTextChange textChange = null; 
+    private AnvilTextChange textChange = null;
 
     // used for setting custom inventory
     static Field mc_ContainerAnvil_repairInventory; // subcontainer with only the result

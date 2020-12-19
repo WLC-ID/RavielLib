@@ -64,6 +64,10 @@ public class NmsManager {
                     anvil = new me.raviel.lib.nms.version.v1_15_R1.anvil.AnvilCore();
                     nbt = new me.raviel.lib.nms.version.v1_15_R1.nbt.NBTCoreImpl();
                     break;
+                case "v1_16_R1":
+                    anvil = new me.raviel.lib.nms.version.v1_16_R1.anvil.AnvilCore();
+                    nbt = new me.raviel.lib.nms.version.v1_16_R1.nbt.NBTCoreImpl();
+                    break;
             default:
                 Logger.getLogger(NmsManager.class.getName()).log(Level.SEVERE, "Failed to load NMS for this server version: version {0} not found", serverPackageVersion);
                 anvil = null;

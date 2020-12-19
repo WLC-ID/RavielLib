@@ -243,7 +243,7 @@ public class BlockUtils {
      * @return
      */
     public static Block getDoubleDoor(Block block) {
-        // TODO? if legacy, just search N/S/E/W to see if there's another door nearby
+        // TODO ? if legacy, just search N/S/E/W to see if there's another door nearby
         if (!isOpenable(block.getType())) {
             return null;
         }

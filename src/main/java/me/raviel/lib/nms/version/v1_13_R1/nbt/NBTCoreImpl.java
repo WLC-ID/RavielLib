@@ -1,9 +1,12 @@
 package me.raviel.lib.nms.version.v1_13_R1.nbt;
 
-import me.raviel.lib.nms.version.nbt.NBTCompound;
 import me.raviel.lib.nms.version.nbt.NBTCore;
+import me.raviel.lib.nms.version.nbt.NBTEntity;
 import me.raviel.lib.nms.version.nbt.NBTItem;
+import net.minecraft.server.v1_13_R1.NBTTagCompound;
+import org.bukkit.craftbukkit.v1_13_R1.entity.CraftEntity;
 import org.bukkit.craftbukkit.v1_13_R1.inventory.CraftItemStack;
+import org.bukkit.entity.Entity;
 import org.bukkit.inventory.ItemStack;
 
 public class NBTCoreImpl implements NBTCore {
@@ -14,8 +17,21 @@ public class NBTCoreImpl implements NBTCore {
     }
 
     @Override
-    public NBTCompound newCompound() {
-        return new NBTCompoundImpl();
+    public NBTItem newItem() {
+        return new NBTItemImpl(null);
+    }
+
+    @Override
+    public NBTEntity of(Entity entity) {
+        net.minecraft.server.v1_13_R1.Entity nmsEntity = ((CraftEntity) entity).getHandle();
+        NBTTagCompound nbt = new NBTTagCompound();
+        nmsEntity.save(nbt);
+        return new NBTEntityImpl(nbt, nmsEntity);
+    }
+
+    @Override
+    public NBTEntity newEntity() {
+        return new NBTEntityImpl(new NBTTagCompound(), null);
     }
 
 }

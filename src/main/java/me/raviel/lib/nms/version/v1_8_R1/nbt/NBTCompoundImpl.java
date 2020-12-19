@@ -1,10 +1,19 @@
 package me.raviel.lib.nms.version.v1_8_R1.nbt;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.util.UUID;
+
 import me.raviel.lib.nms.version.nbt.NBTCompound;
 import me.raviel.lib.nms.version.nbt.NBTObject;
+import net.minecraft.server.v1_8_R1.NBTCompressedStreamTools;
 import net.minecraft.server.v1_8_R1.NBTTagCompound;
 
-public class NBTCompoundImpl implements NBTCompound {
+public abstract class NBTCompoundImpl implements NBTCompound {
 
     protected NBTTagCompound compound;
 
@@ -59,6 +68,19 @@ public class NBTCompoundImpl implements NBTCompound {
     }
 
     @Override
+    public NBTCompound set(String tag, int[] i) {
+        compound.setIntArray(tag, i);
+        return this;
+    }
+
+    @Override
+    public NBTCompound set(String tag, UUID u) {
+        set(tag + "Most", u.getMostSignificantBits());
+        set(tag + "Least", u.getLeastSignificantBits());
+        return this;
+    }
+
+    @Override
     public NBTCompound remove(String tag) {
         compound.remove(tag);
         return this;
@@ -74,4 +96,34 @@ public class NBTCompoundImpl implements NBTCompound {
         return new NBTObjectImpl(compound, tag);
     }
 
+    @Override
+    public byte[] serialize(String... exclusions) {
+        try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+             ObjectOutputStream dataOutput = new ObjectOutputStream(outputStream)) {
+            addExtras();
+            NBTTagCompound compound = (NBTTagCompound)this.compound.clone(); // Changed in 1.12 // Changed in 1.9.4
+
+            for (String exclusion : exclusions)
+                compound.remove(exclusion);
+
+            NBTCompressedStreamTools.a(compound, (OutputStream) dataOutput);
+
+            return outputStream.toByteArray();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public void deSerialize(byte[] serialized) {
+        try (ByteArrayInputStream inputStream = new ByteArrayInputStream(serialized);
+             ObjectInputStream dataInput = new ObjectInputStream(inputStream)) {
+            compound = NBTCompressedStreamTools.a((InputStream) dataInput);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
+

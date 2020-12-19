@@ -9,7 +9,7 @@
     <groupId>me.raviel</groupId>
     <artifactId>RavielLib</artifactId>
     <name>RavielLib</name>
-    <version>1.2.0</version>
+    <version>1.3.0</version>
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
@@ -120,6 +120,34 @@
             <version>1.15.1</version>
             <scope>system</scope>
             <systemPath>${basedir}/src/lib/paper-1.15.1.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.destroystokyo.papermc</groupId>
+            <artifactId>paper1.16.1</artifactId>
+            <version>1.16.1</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/lib/paper-1.16.1.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.destroystokyo.papermc</groupId>
+            <artifactId>paper1.16.2</artifactId>
+            <version>1.16.2</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/lib/paper-1.16.2.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.destroystokyo.papermc</groupId>
+            <artifactId>paper1.16.3</artifactId>
+            <version>1.16.3</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/lib/paper-1.16.3.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.destroystokyo.papermc</groupId>
+            <artifactId>paper1.16.4</artifactId>
+            <version>1.16.4</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/lib/paper-1.16.4.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.zaxxer</groupId>

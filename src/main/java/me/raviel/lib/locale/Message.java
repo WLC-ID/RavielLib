@@ -1,12 +1,16 @@
 package me.raviel.lib.locale;
 
-import me.raviel.lib.compatibility.ServerVersion;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import me.raviel.lib.chat.ChatMessage;
+import me.raviel.lib.compatibility.ServerVersion;
+import me.raviel.lib.utils.TextUtils;
 
 /**
  * The Message object. This holds the message to be sent
@@ -25,8 +29,8 @@ public class Message {
 		} catch (Exception ex) {
         }
     }
-    private String prefix = null;
-    private String message;
+    private ChatMessage prefix = null;
+    private ChatMessage message;
 
     /**
      * create a new message
@@ -34,6 +38,17 @@ public class Message {
      * @param message the message text
      */
     public Message(String message) {
+        ChatMessage chatMessage = new ChatMessage();
+        chatMessage.fromText(message);
+        this.message = chatMessage;
+    }
+
+    /**
+     * create a new message
+     *
+     * @param message the message text
+     */
+    public Message(ChatMessage message) {
         this.message = message;
     }
 
@@ -47,26 +62,16 @@ public class Message {
     }
 
     /**
-     * Format and send the held message with the
-     * appended plugin prefix to a player
-     *
-     * @param player player to send the message to
-     */
-    public void sendPrefixedMessage(Player player) {
-        player.sendMessage(this.getPrefixedMessage());
-    }
-
-    /**
      * Format and send the held message to a player
      *
      * @param sender command sender to send the message to
      */
     public void sendMessage(CommandSender sender) {
-        sender.sendMessage(this.getMessage());
+        message.sendTo(sender);
     }
 
     /**
-     * Format and send the held message to a player as a title message
+     * Format and send the held message to a player as a title messagexc
      *
      * @param sender command sender to send the message to
      */
@@ -105,7 +110,7 @@ public class Message {
      * @param sender command sender to send the message to
      */
     public void sendPrefixedMessage(CommandSender sender) {
-        sender.sendMessage(this.getPrefixedMessage());
+        this.message.sendTo(this.prefix, sender);
     }
 
     /**
@@ -115,8 +120,7 @@ public class Message {
      * @return the prefixed message
      */
     public String getPrefixedMessage() {
-        return ChatColor.translateAlternateColorCodes('&',(prefix == null ? "" : this.prefix)
-                + " " +  this.message);
+        return TextUtils.formatText((prefix == null ? "" : this.prefix.toText()) + " " +  this.message.toText());
     }
 
     /**
@@ -125,7 +129,7 @@ public class Message {
      * @return the message
      */
     public String getMessage() {
-        return ChatColor.translateAlternateColorCodes('&', this.message);
+        return TextUtils.formatText(this.message.toText());
     }
 
     /**
@@ -134,7 +138,7 @@ public class Message {
      * @return the message
      */
     public List<String> getMessageLines() {
-        return Arrays.asList(ChatColor.translateAlternateColorCodes('&', this.message).split("\n|\\|"));
+        return Arrays.asList(ChatColor.translateAlternateColorCodes('&', this.message.toText()).split("\n|\\|"));
     }
 
     /**
@@ -143,7 +147,7 @@ public class Message {
      * @return the message
      */
     public String getUnformattedMessage() {
-        return this.message;
+        return this.message.toText();
     }
 
     /**
@@ -161,12 +165,17 @@ public class Message {
     }
 
     Message setPrefix(String prefix) {
-        this.prefix = prefix;
+        this.prefix = new ChatMessage();
+        this.prefix.fromText(prefix + " ");
         return this;
     }
 
     @Override
     public String toString() {
-        return this.message;
+        return this.message.toString();
+    }
+
+    public String toText() {
+        return this.message.toText();
     }
 }

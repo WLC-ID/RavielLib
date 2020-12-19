@@ -10,11 +10,19 @@ public class NBTItemImpl extends NBTCompoundImpl implements NBTItem {
     private net.minecraft.server.v1_13_R1.ItemStack nmsItem;
 
     public NBTItemImpl(net.minecraft.server.v1_13_R1.ItemStack nmsItem) {
-        super(nmsItem.hasTag() ? nmsItem.getTag() : new NBTTagCompound());
+        super(nmsItem != null && nmsItem.hasTag() ? nmsItem.getTag() : new NBTTagCompound());
         this.nmsItem = nmsItem;
     }
 
     public ItemStack finish() {
-        return CraftItemStack.asBukkitCopy(nmsItem);
+        if (nmsItem == null) {
+            return CraftItemStack.asBukkitCopy(net.minecraft.server.v1_13_R1.ItemStack.a(compound));
+        } else {
+            return CraftItemStack.asBukkitCopy(nmsItem);
+        }
+    }
+
+    @Override
+    public void addExtras() {
     }
 }

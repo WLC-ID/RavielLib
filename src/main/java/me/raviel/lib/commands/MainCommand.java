@@ -1,6 +1,6 @@
 package me.raviel.lib.commands;
 
-import me.raviel.lib.input.ClickableChat;
+import me.raviel.lib.chat.ChatMessage;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -79,7 +79,7 @@ public class MainCommand extends AbstractCommand {
                 if (!isPlayer) {
                     sender.sendMessage(ChatColor.DARK_GRAY + "- " + ChatColor.YELLOW + cmd.getSyntax() + ChatColor.GRAY + " - " + cmd.getDescription());
                 } else if (cmd.getPermissionNode() == null || sender.hasPermission(cmd.getPermissionNode())) {
-                    ClickableChat msg = new ClickableChat();
+                    ChatMessage msg = new ChatMessage();
                     final String c = "/" + command + " ";
                     msg.addMessage(ChatColor.DARK_GRAY + "- ")
                             .addPromptCommand(ChatColor.YELLOW + c + cmd.getSyntax(), ChatColor.YELLOW + c + cmdStr, c + cmdStr)
