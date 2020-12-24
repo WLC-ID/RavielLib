@@ -1,5 +1,6 @@
 main: me.raviel.lib.RavielLib
 name: ${project.artifactId}
 version: ${project.version}
+softdepend: [Vault]
 author: Raviel
 api-version: 1.13
