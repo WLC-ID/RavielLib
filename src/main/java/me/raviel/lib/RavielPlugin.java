@@ -93,8 +93,6 @@ public abstract class RavielPlugin extends JavaPlugin {
             return;
         }
 
-        console.sendMessage(" "); // blank line to separate chatter
-        console.sendMessage(ChatColor.GREEN + "=============================");
         console.sendMessage(String.format("%s%s %s by %sRaviel !", ChatColor.GRAY.toString(),
                 getDescription().getName(), getDescription().getVersion(), ChatColor.GOLD.toString()));
         console.sendMessage(String.format("%sAction: %s%s%s...", ChatColor.GRAY.toString(),
@@ -105,8 +103,6 @@ public abstract class RavielPlugin extends JavaPlugin {
             // plugin setup
             onPluginEnable();
             if(emergencyStop) {
-                console.sendMessage(ChatColor.RED + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                console.sendMessage(" ");
                 return;
             }
         } catch (final Throwable t) {
@@ -116,13 +112,8 @@ public abstract class RavielPlugin extends JavaPlugin {
                     + " c" + RavielLib.getVersion()
                     + ": Disabling plugin!", t);
             emergencyStop();
-            console.sendMessage(ChatColor.RED + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            console.sendMessage(" ");
             return;
         }
-
-        console.sendMessage(ChatColor.GREEN + "=============================");
-        console.sendMessage(" "); // blank line to separate chatter
     }
 
     protected void emergencyStop() {
@@ -135,15 +126,11 @@ public abstract class RavielPlugin extends JavaPlugin {
         if (emergencyStop) {
             return;
         }
-        console.sendMessage(" "); // blank line to speparate chatter
-        console.sendMessage(ChatColor.GREEN + "=============================");
         console.sendMessage(String.format("%s%s %s by %sRaviel !", ChatColor.GRAY.toString(),
                 getDescription().getName(), getDescription().getVersion(), ChatColor.GOLD.toString()));
         console.sendMessage(String.format("%sAction: %s%s%s...", ChatColor.GRAY.toString(),
                 ChatColor.RED.toString(), "Disabling", ChatColor.GRAY.toString()));
         onPluginDisable();
-        console.sendMessage(ChatColor.GREEN + "=============================");
-        console.sendMessage(" "); // blank line to speparate chatter
     }
 
     public ConsoleCommandSender getConsole() {

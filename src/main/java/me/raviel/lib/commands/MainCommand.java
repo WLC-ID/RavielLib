@@ -61,7 +61,7 @@ public class MainCommand extends AbstractCommand {
             sender.sendMessage(String.format("%s%s %s» %sVersion %s Created by %sRaviel",
                     ChatColor.GOLD.toString() + ChatColor.BOLD, plugin.getDescription().getName(),
                     ChatColor.DARK_GRAY.toString(), ChatColor.GRAY.toString(), plugin.getDescription().getVersion(),
-                    ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + ChatColor.ITALIC
+                    ChatColor.YELLOW.toString()
             ));
         }
 
